@@ -1,0 +1,31 @@
+# transform from native 2 template space 
+def applytransforms_native2Template(sub, day):
+    unsmoothed_funcs_path = '/home/data/MRI_FCWML{}/ses-day{}/func/sub-MRIFCWML{}_ses-day{}_task-rest_acq-normal_run-01_bold'.format(sub, day, sub, day)
+    unsmoothed_funcs_path = glob.glob(os.path.join(unsmoothed_funcs_path, ))
+
+    T12Template_warps = glob.glob('/home/data/MRI_FCWML{}/ses-day2/anat/sub-MRIFCWML{}_ses-day2_acq-highres_run-02_T1w/ANTs_transforms/MRI_FCWML{}_*1Warp.nii.gz'.format(sub))	    
+    T12Template_aff_transforms = glob.glob('/home/data/MRI_FCWML{}/ses-day2/anat/sub-MRIFCWML{}_ses-day2_acq-highres_run-02_T1w/ANTs_transforms/MRI_FCWML{}_*GenericAffine.mat'.format(sub))
+
+    transform1 = T12Template_warps
+    transform2 = T12Template_aff_transforms 
+    
+    # ref image
+    template_brain_2p0 = 'home/grouptemplates/step1_TemplateMultivariateSyN/2p0_T_template0.nii'
+    
+    # input im
+    input_im = unsmoothed_funcs
+    
+    # output pref
+    output_pref = '/home/blloyd/Experiment_data/NYU_LCRS/data/MRI_FCWML{}/ses-day{}/func/sub-MRIFCWML{}_ses-day{}_task-rest_acq-normal_run-01_bold'.format(sub, day, sub, day)
+   
+    # command line:
+    command =' '.join(['antsApplyTransforms ', '-d 3', 
+                '-i', input_im,
+                '-r', template_brain_2p0,
+                '-o', output_pref 
+                '-t', transform1[0], 
+                '-t', transform2[0],
+                '-v 1'])
+    # run coreg step
+    print(command)
+    os.system(command)    
