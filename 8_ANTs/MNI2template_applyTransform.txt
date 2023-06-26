@@ -1,0 +1,23 @@
+
+#-------------------------------------------------------------------------------------
+# Define ROIs
+ROI_path = /home/memory/lindvoo/ANTs_NYU_LC/masks/
+ROI_file = cuneus_l+r.nii   
+
+# Define tempalate image (resliced to size of EPI)
+template_image = /home/memory/lindvoo/ANTs_NYU_LC/T1_im_orig/reT_template0.nii
+
+# Define tranforms files
+warp_file = /home/memory/lindvoo/ANTs_NYU_LC/transform_MNI2TEMP/warped_MNI2Template1Warp.nii.gz
+tranform_mat_file = /home/memory/lindvoo/ANTs_NYU_LC/transform_MNI2TEMP/warped_MNI2Template0GenericAffine.mat
+
+#-------------------------------------------------------------------------------------
+# run tranforms 
+antsApplyTransforms \
+  -d 3 \
+  -i ${ROI_path }${ROI_file} \
+  -r ${template_image} \
+  -o ${ROI_path}T_template0_${ROI_file} \
+  -n Linear -t [$warp_file,0] \
+  -t [$tranform_mat_file,0] \
+  --verbose

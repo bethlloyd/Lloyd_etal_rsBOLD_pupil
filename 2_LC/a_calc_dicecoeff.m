@@ -60,19 +60,19 @@ nvox_overlap = [n_overlap]';
 nvox_rater1 = [n_rater1]';
 nvox_rater2 = [n_rater2]';
 %get the data from the images based on the ROI
-%extract_coeff(1,1)=cellstr(strcat(num2str(SUBJNAME)));
-%extract_coeff(1,2)=num2cell(dice_c);
+extract_coeff(1,1)=cellstr(strcat(num2str(SUBJNAME)));
+extract_coeff(1,2)=num2cell(dice_c);
      
   
   % SAVE DATA
 %--------------------------------------------------------------------------
 %remove 2nd row (full of commas) 
-%extracteddata{c_roi}(2,:) = [];
-%newroi_name=erase(roinames{c_roi}, '.nii');
+extracteddata{c_roi}(2,:) = [];
+newroi_name=erase(roinames{c_roi}, '.nii');
 
 % filename=strcat('dice_coeff.csv');
-% savefilename=fullfile(padi.stats, 'LC_mask',filename);
-% cell2csv(savefilename,extract_coeff);
+savefilename=fullfile(padi.stats, 'LC_mask',filename);
+ell2csv(savefilename,extract_coeff);
 % 
 % SUBJNAME
 

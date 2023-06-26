@@ -15,7 +15,7 @@ for mask=1:numel(LC_mask)
     
     disp(['checking mask ' LC_mask(mask).name])
     
-    load batch_reslice_NN_masks
+    load batch_binarize_LC_NN
     
     %change subject code
     matlabbatch = struct_string_replace(matlabbatch,'0p89_template_space_LC_roi_001.nii',char(LC_mask(mask).name));
@@ -47,7 +47,7 @@ for mask=1:numel(LC_mask)
     
     disp(['checking mask ' LC_mask(mask).name])
     
-    load batch_groupLC_NN
+    load batch_binarize_LC_NN
     
     %change subject code
     matlabbatch = struct_string_replace(matlabbatch,'0p89_template_space_LC_roi_001.nii',char(LC_mask(mask).name));
@@ -61,9 +61,9 @@ for mask=1:numel(LC_mask)
     
 end
 
-%% Create group mask for num 4,7,20
+%% Create group mask except for subjects: 4,7,20
 
-scanname = 'agg_0p89_LC_ROIs_69p.nii';
+scanname = 'agg_0p89_LC_ROIs_67p.nii';
 
 [roixyz] = f_NYULC_threeDfind2(scanname,1,2);
 

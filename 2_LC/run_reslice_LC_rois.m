@@ -15,9 +15,6 @@ for mask=1:numel(LC_mask.name)
     disp(['checking mask ' LC_mask(mask).name]);
 
     % reslice 
-    
-    
-    % threshold 
     load batch_reslice_NN_masks.mat
 
      %change subject code
